@@ -1,0 +1,42 @@
+<div class = "panel panel-primary">
+    <div class="panel-heading">
+        <h1>{{pageTitle}}</h1>
+    </div>
+
+<div class = "panel-body">
+    <div>
+        <input type="text"  class=" form-control" [(ngModel)] ="filterBy" placeholder=" filter the list"/> <!--two way databinding (use property binding"[]" and event binding"()") and give it as name-->
+        <div class = "alert alert-success" *ngIf= "filterBy">
+             {{filterBy}}
+        </div>
+    </div>
+    
+<table class = "table table-bordered" *ngIf = "products && products.length">
+    <tr>
+        <th><button class="btn btn-primary" (click)= "toggleImage()">{{showHideImage? "Hide-img" : "Show-img"}}</button></th>
+        <th>Product Name</th>
+        <th>Product code</th>
+        <th>Price</th>
+        <th>Rating</th>
+    </tr>
+    <tr *ngFor="let product of products | products :filterBy  ">     <!--we have to create model variable first and give it to the filter we created here.-->
+        <td>
+            <img *ngIf = "showHideImage" [src]= "product.imageUrl" style="width:50px"/>
+        </td>
+        
+        <td>
+             <a [routerLink] = "['/products', product.productId]">
+            {{product.productName}}</a>
+            </td>
+        <td>{{product.productCode}}</td>
+        <td>{{product.price}}</td>
+        <td>{{product.starRating}}
+        <app-rating [rating]= "product.starRating" (ratingEvent)= "ratingParentFn($event)"></app-rating> <!--we used property binding for input decorator-->
+        
+        <!--<app-rating></app-rating>-->
+        </td>
+        
+    </tr>
+</table>
+</div>
+</div>

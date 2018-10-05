@@ -1,0 +1,19 @@
+<p>
+ {{ ProductData.productName }}
+</p>
+<p>
+ {{ ProductData.productCode }}
+</p>
+<p>
+ {{ ProductData.description }}
+</p>
+<p>
+ {{ ProductData.price }}
+</p>
+<p>
+ {{ ProductData.starRating }}
+</p>
+<div>
+    <img [src] = "ProductData.imageUrl">
+</div>
+<button (click) = "back()"> Back</button>
